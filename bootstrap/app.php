@@ -62,6 +62,7 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('services');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +79,10 @@ $app->configure('services');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
+ $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+     'client.credentials' => Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -94,10 +96,12 @@ $app->configure('services');
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Laravel\Passport\PassportServiceProvider::class);
+$app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 
-/*
+/*eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiMzYyODYzNTA0NGMxNzQ1MWU1YjA4MzUxZWJiODFkZDlkZjAzY2RkNjBkMWRmZThiODQ4MTZmOTE4ZWYwZmVkOGQxZDNjM2Y2YmI1MjViMWEiLCJpYXQiOjE2NzM0NDk5OTguNDMwNTk3LCJuYmYiOjE2NzM0NDk5OTguNDMwNjAyLCJleHAiOjE3MDQ5ODU5OTguNDE0NDQyLCJzdWIiOiIiLCJzY29wZXMiOltdfQ.KHZthUlrKc7mNGlW76ncu2_Qy5-f4gEDnUKSibSla-A32WHDjX7wNY8YYthOIEY_f7D9xlvhrxbGdhP9j8MbgDTCBNwkUnQugve6HJz1D4ZQL22RaTa30bq-TtMf3UL7UIMbv3pkdcdRnF7Mq5xL40AkTGawOQmIua3YBaLcoTFesqKbCPHT4gT7Vu7Za6Fo3hRgyFGLDya78SG8iBuk8P3i1vDa-lGKA-8dh-PmLvE2Q4KKiYtZIeep_O4jbBzMUkxe2FNGS2ijPSt9EUs54tRA9lAgeUf1hckGE5-pixyTQJkZwCO3zBgXFayd8ausMimOLI-A3HFHVKIJjzXhlK4lisqGJATCYLmjtK0Xw2SS_lIyflVu48AmEqrGoV1lmYfGJjGPmzkwmXE25DJLdzW8M-JxtYoJrAiS1LdzWfuQ3XSnuzZ3C4Bu2RTxpdJaZVUKQXtQl8CdE1cwAXAqmeohBHyqO-hXalH0mBQtAkU2kJl-Nl6fFuyg0aWrCcVD4lXevJHiz6qUGg-kXDnAvbGgQesmL5ZBuXWNwNmlz1NqJFosV1smgiVuO6ekC7tnH7PHyCVx1aCftSiWZ4PY8ALq4iEkAEX-rLM4qyaeXvnRi1ukClTV6lLZQp0_vkPtnTeyT02mqNHLd8pEjkPJWfljIGeLksYKZ80RhHMT5_A
 |--------------------------------------------------------------------------
 | Load The Application Routes
 |--------------------------------------------------------------------------
